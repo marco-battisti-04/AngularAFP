@@ -12,3 +12,5 @@ How do download, install and run the application
 - enjoy
 
 ## About
+
+My idea for the project was to create a website for searching movies from a local database (the idea started from the fact that I have many movies on Blu-ray and DVD at home and I wanted to make a catalog) with a supporting API for searching for movies in case they are not present in the local database, and then adding them to it to expand the catalog. No authentication would be necessary since once the project for advanced training is finished, I would only use it locally, so I don't think I will implement it. Obviously, both a client (in Angular for the project) and a server need to be created (I need to see what is more convenient, but most likely Python or .NET).
