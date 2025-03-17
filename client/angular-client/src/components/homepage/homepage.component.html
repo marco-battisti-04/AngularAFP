@@ -23,16 +23,16 @@
 
         </div>
 
-        @if (show_latest_entry == true) {
-            <div class="recomended-container">
-                <!-- TODO: fix this -->
-                @for (last_entry of last_entry_list; track index) {
+        <div class="feed-container">
 
+            <div class="recommended-container">
+                @for(recomended_item of recomended_list; track recomended_item) {
+                    <!-- TODO: see if it works -->
+                    <app-recomended-home-item></app-recomended-home-item>
                 }
             </div>
-        }
-        <div>
-
         </div>
+
+        
     </div>
 </div>
