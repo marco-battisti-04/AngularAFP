@@ -1,11 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormGroup, ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
-  imports: [],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  standalone: true,
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css'
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
 
+  readonly router = inject(Router);
+
+  search_text: string = '';
+  form!: FormGroup;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.form = new FormGroup({
+      search_text: new FormControl('')
+    });
+  }
+
+  search() {
+    this.router.navigate(['/search', this.search_text]);
+  }
 }

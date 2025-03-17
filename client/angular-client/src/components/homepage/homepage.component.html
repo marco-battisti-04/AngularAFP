@@ -1,1 +1,13 @@
-<p>homepage works!</p>
+<div class="container">
+
+    <div class="header">
+        <form action="/search/{{search_text}}">
+            <input type="text" [(ngModel)]="search_text" name="search_text" placeholder="Cerca un film">
+            <button type="submit" (click)="search()">Cerca</button>
+        </form>
+    </div>
+
+    <div class="page-content">
+        
+    </div>
+</div>
