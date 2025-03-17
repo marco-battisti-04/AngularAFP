@@ -15,6 +15,9 @@ import { Router, RouterLink } from '@angular/router';
 export class HomepageComponent implements OnInit {
 
   readonly router = inject(Router);
+  show_latest_entry: boolean = false;
+  last_entry_list: any[] = [];
+
 
   search_text: string = '';
   form!: FormGroup;
