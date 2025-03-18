@@ -2,7 +2,8 @@
     width: 100%;
     height: 100%;
 
-    background-color: #1d1b1b;
+    /* background-color: #1d1b1b; */
+    background: linear-gradient(to bottom right, #1d1b1b, #111010);
 }
 
 
@@ -50,11 +51,7 @@
 
 .search-button {
     border: 0px;
-    /* padding: 5px; */
-    /* border-radius: 5px; */
-
     color: white;
-    /* background-color: rgb(87, 83, 83); */
 }
 
 .search-button:hover {
@@ -79,39 +76,47 @@
 
 @media (min-width: 601px) {
 
-    .slogan-container {
-        width: 50%;
-        height: 100%;
-
-        padding-top: 5%;
-        padding-left: 2.5%;
-        background-color: green;
-    }
-
-    .slogan-square {
-        width: 90%;
-        height: 60%;
-
-        background-color: yellow;
-    }
-
     .page-content {
         padding-top: 2.5%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-text {
+        height: 5%;
+
+        font-size: 2.5em;
+        color: white;
+        font-size: 60px;
+
     }
 
     .selection-items-container {
 
         width: 100%;
-        height: 30%;
+        height: 80%;
 
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: auto auto;
+        display: flex;
+        flex-direction: column;
 
         justify-content: center;
         align-items: center;
         justify-items: center;
 
+        margin-top: 2%;
+    }
+
+    .selection-items-first-row, .selection-items-second-row {
+        width: 90%;
+        height: 46%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 2%;
     }
 
     .home-selection-item {

@@ -24,6 +24,8 @@ export class HomepageComponent implements OnInit {
   first_row_list: any[] = ["consigliati","libreria","preferiti"];
   second_row_list: any[] =["da vedere", "impostazioni"];
 
+  hero_text: string = '';
+
   search_text: string = '';
   form!: FormGroup;
 
