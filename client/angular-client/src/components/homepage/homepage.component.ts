@@ -1,12 +1,18 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { HomeSelectionItemComponent } from '../../utils/components/home-selection-item/home-selection-item.component';
 
 @Component({
   selector: 'app-homepage',
   imports: [
     FormsModule,
     ReactiveFormsModule,
+    HomeSelectionItemComponent,
+    ButtonModule,
+    InputTextModule
   ],
   standalone: true,
   templateUrl: './homepage.component.html',
@@ -15,9 +21,8 @@ import { Router, RouterLink } from '@angular/router';
 export class HomepageComponent implements OnInit {
 
   readonly router = inject(Router);
-  // recomended_list: boolean = false;
-  recomended_list: any[] = [];
-
+  first_row_list: any[] = ["consigliati","libreria","preferiti"];
+  second_row_list: any[] =["da vedere", "impostazioni"];
 
   search_text: string = '';
   form!: FormGroup;
@@ -31,6 +36,10 @@ export class HomepageComponent implements OnInit {
   }
 
   search() {
-    this.router.navigate(['/search', this.search_text]);
+    let value = this.search_text.trim();
+
+    if (value != '') {
+      this.router.navigate(['/search', this.search_text]);
+    }
   }
 }
