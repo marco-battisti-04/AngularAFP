@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
+
+# FIXME: circular import somehow
 # from models import Film
 import configparser
 
