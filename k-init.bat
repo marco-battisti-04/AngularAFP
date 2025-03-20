@@ -5,9 +5,9 @@ setlocal
 set "SCRIPT_DIR=%~dp0"
 
 @REM start the client
-start cmd /k "cd /d %SCRIPT_DIR%client/angular-client && npm start"
+start cmd /k "cd /d %SCRIPT_DIR%client/angular-client && npm install"
 
 @REM start the server
-start cmd /k "cd /d %SCRIPT_DIR%server/WeApiFlask && python app.py"
+start cmd /k "cd /d %SCRIPT_DIR%server/WeApiFlask && pip install -r requirements.txt"
 
 endlocal
