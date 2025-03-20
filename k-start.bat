@@ -8,6 +8,6 @@ set "SCRIPT_DIR=%~dp0"
 start cmd /k "cd /d %SCRIPT_DIR%client/angular-client && npm start"
 
 @REM start the server
-start cmd /k "cd /d %SCRIPT_DIR%server/WeApiFlask && python app.py"
+start cmd /k "cd /d %SCRIPT_DIR%server/WebApiFlask && python app.py"
 
 endlocal
