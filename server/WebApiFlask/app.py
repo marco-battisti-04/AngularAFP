@@ -1,55 +1,48 @@
-from flask import Flask, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
 
-# FIXME: circular import somehow
-# from models import Film
+from flask import Flask, request, jsonify
+from models import db
+
+from routes.api_routes import api
+from routes.swagger_routes import swagger
+
 import configparser
 
-
-app = Flask(__name__)
+# Read the configuration file
 config = configparser.ConfigParser()
-
 config.read('application.cfg')
-app.debug = config['App']['DEBUG']
 
+# api prefix
+api_prefix = f'/api/v{int(config["App"]["VERSION"])}'
+swagger_prefix = f'/swagger/v{int(config["App"]["VERSION"])}'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = config['Database']['SQLALCHEMY_DATABASE_URI']
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config['Database']['SQLALCHEMY_TRACK_MODIFICATIONS']
-db = SQLAlchemy(app)
+# Database URI
+DATABASE_URI = config['Database']['SQLALCHEMY_DATABASE_URI']
 
+# Create the Flask app
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Initialize SQLAlchemy
+db.init_app(app)
 
-with app.app_context():
-    db.create_all()
+##############
+# API ROUTES #
+#region ######
 
-prefix = f'/api/v{int(config["App"]["VERSION"])}'
+# api routes
+app.register_blueprint(api, url_prefix=api_prefix)
 
-@app.route(f'{prefix}/films', methods=['GET'])
-def get_all_films():
-    films = Film.query.all()
-    
-    # for film in films:
-    #     film_vars = {key: value for key, value in vars(film).items() if not key.startswith('_')}
+# swagger routes
+app.register_blueprint(swagger, url_prefix=swagger_prefix)
 
+##################
+# END API ROUTES #
+#endregion #######
 
-    # return jsonify([{fil: film.to_dict()} for film in films])
-    return {'films': [film.to_dict() for film in films]}
-#enddef
-
-@app.route(f'{prefix}/film', methods=['POST'])
-def add_new_film():
-    from models import Film
-
-    print("test")
-    # data = request.get_json()
-    # film = Film(**data)
-    film = Film(title='Test Film', year=2023, short_description='Test Description', duration=120, rating=8.5)
-
-    db.session.add(film)
-    db.session.commit()
-    return {'id': film.id}
-
-app.run()
+if __name__ == '__main__':
+    app.run(debug=True)
+#endif
 
 # API LINK
-# "https://rapidapi.com/SAdrian/api/moviesdatabase/playground/apiendpoint_8a309a21-6ba0-4c48-8653-9d545f6fc946"
+# "https://rapidapi.com/SAdrian/api/moviesdatabase/playground/apiendpoint_8a309a21-6ba0-4c48-8653-9d545f6fc946"'
