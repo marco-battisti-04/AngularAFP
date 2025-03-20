@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { HomeSelectionItemComponent } from '../../utils/components/home-selection-item/home-selection-item.component';
+import { HeaderItemComponent } from '../../utils/components/header-item/header-item.component';
 
 @Component({
   selector: 'app-homepage',
@@ -11,6 +12,7 @@ import { HomeSelectionItemComponent } from '../../utils/components/home-selectio
     FormsModule,
     ReactiveFormsModule,
     HomeSelectionItemComponent,
+    HeaderItemComponent,
     ButtonModule,
     InputTextModule
   ],
@@ -60,13 +62,5 @@ export class HomepageComponent implements OnInit {
     this.form = new FormGroup({
       search_text: new FormControl('')
     });
-  }
-
-  search() {
-    let value = this.search_text.trim();
-
-    if (value != '') {
-      this.router.navigate(['/search', this.search_text]);
-    }
   }
 }

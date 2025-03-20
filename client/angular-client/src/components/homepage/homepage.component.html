@@ -1,25 +1,7 @@
 <div class="container">
 
-    <div class="header">
-
-        <div class="logo-container">
-
-        </div>
-
-        <div class="search-container">
-            <form action="" class="search-form">
-                <input class="search-input" type="text" pInputText [(ngModel)]="search_text" name="search_text" placeholder="Cerca un film">
-                <!-- <input class="search-input" type="text" [(ngModel)]="search_text" name="search_text" placeholder="Cerca un film"> -->
-                <!-- <button class="search-button" type="submit" (click)="search()">Cerca</button> -->
-                <!-- <p-button class="search-button" type="submit" (click)="search()" label="Cerca" icon="pi pi-check" [loading]="loading" ></p-button> -->
-                <p-button class="search-button" type="submit" (click)="search()">Cerca <span class="pi pi-search"></span></p-button>
-            </form>
-        </div>
-
-        <div class="settings-container">
-
-        </div>
-    </div>
+    <!-- header -->
+    <app-header-item></app-header-item>
 
     <div class="page-content">
         <span class="hero-text">{{hero_text}}</span>

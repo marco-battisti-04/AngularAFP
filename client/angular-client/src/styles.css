@@ -7,6 +7,10 @@
     text-decoration: none;
 }
 
+html {
+    background: linear-gradient(to bottom right, #1d1b1b, #111010);
+}
+
 body {
     width: 100vw;
     height: 100vh;

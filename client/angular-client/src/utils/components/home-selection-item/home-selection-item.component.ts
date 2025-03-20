@@ -19,10 +19,8 @@ export class HomeSelectionItemComponent implements OnInit {
 
   constructor () { }
 
-
   ngOnInit(): void {
     this.item.title = this.item.title.toUpperCase()
-    console.log(this.item);
   }
 
   redirect() {
