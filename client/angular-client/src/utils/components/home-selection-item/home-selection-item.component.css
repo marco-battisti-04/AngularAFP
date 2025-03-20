@@ -31,6 +31,6 @@
         font-size: calc(1.5em + 1vw);
         font-weight: bolder;
 
-        pointer-events: none
+        user-select: none;
     }
 }

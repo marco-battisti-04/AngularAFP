@@ -21,10 +21,35 @@ import { HomeSelectionItemComponent } from '../../utils/components/home-selectio
 export class HomepageComponent implements OnInit {
 
   readonly router = inject(Router);
-  first_row_list: any[] = ["consigliati","libreria","preferiti"];
-  second_row_list: any[] =["da vedere", "impostazioni"];
+  first_row_list: any[] = [
+    {
+      "title": "consigliati",
+      "url": "/recommended"
+    },
+    {
+      "title": "libreria",
+      "url": "/library"
+    },
+    {
+      "title": "preferiti",
+      "url": "/favourites"
+    }
+  ]
 
-  hero_text: string = '';
+  second_row_list: any[] = [
+    {
+      "title": "da vedere",
+      "url": "/watchlist"
+    },
+    {
+      "title": "impostazioni",
+      "url": "/settings"
+    }
+  ]
+  // first_row_list: any[] = ["consigliati","libreria","preferiti"];
+  // second_row_list: any[] =["da vedere", "impostazioni"];
+
+  hero_text: string = 'IL TUO CATALOGO PERSONALE';
 
   search_text: string = '';
   form!: FormGroup;

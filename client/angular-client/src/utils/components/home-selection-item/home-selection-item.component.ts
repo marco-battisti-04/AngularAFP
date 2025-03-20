@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-selection-item',
@@ -11,6 +12,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HomeSelectionItemComponent implements OnInit {
 
+  readonly router = inject(Router);
+
   @Input() item: any;
   image_link: string = "/assets/images/library_bg.jpg";
 
@@ -18,7 +21,11 @@ export class HomeSelectionItemComponent implements OnInit {
 
 
   ngOnInit(): void {
-     this.item = this.item.toUpperCase()
-      console.log(this.item);
+    this.item.title = this.item.title.toUpperCase()
+    console.log(this.item);
+  }
+
+  redirect() {
+    this.router.navigate([this.item.url]);
   }
 }
