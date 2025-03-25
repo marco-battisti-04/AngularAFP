@@ -25,7 +25,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize SQLAlchemy
 db.init_app(app)
-
+    
 ##############
 # API ROUTES #
 #region ######
@@ -41,8 +41,5 @@ app.register_blueprint(swagger, url_prefix=swagger_prefix)
 #endregion #######
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=bool(config['App']['DEBUG']), host='0.0.0.0', port=int(config['App']['PORT']))
 #endif
-
-# API LINK
-# "https://rapidapi.com/SAdrian/api/moviesdatabase/playground/apiendpoint_8a309a21-6ba0-4c48-8653-9d545f6fc946"'
