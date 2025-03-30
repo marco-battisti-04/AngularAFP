@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { WebUtilsService } from './web-utils.service';
-import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'

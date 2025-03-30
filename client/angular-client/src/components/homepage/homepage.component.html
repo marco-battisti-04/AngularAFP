@@ -1,7 +1,12 @@
 <div class="container">
 
     <!-- header -->
-    <app-header-item></app-header-item>
+    <app-header-item
+        [placeholder]='Cerca un film'
+        [link]='/search'
+    >
+
+    </app-header-item>
 
     <div class="page-content">
         <span class="hero-text">{{hero_text}}</span>

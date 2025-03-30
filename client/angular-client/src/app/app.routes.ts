@@ -3,6 +3,7 @@ import { HomepageComponent } from '../components/homepage/homepage.component';
 import { NotfoundpageComponent } from '../components/notfoundpage/notfoundpage.component';
 import { SearchpageComponent } from '../components/searchpage/searchpage.component';
 import { DetailpageComponent } from '../components/detailpage/detailpage.component';
+import { FilmlibrarypageComponent } from '../components/filmlibrarypage/filmlibrarypage.component';
 
 export const routes: Routes = [
     {
@@ -18,6 +19,10 @@ export const routes: Routes = [
     {
         path: 'search/:query',
         component: SearchpageComponent
+    },
+    {
+        path: 'library',
+        component: FilmlibrarypageComponent
     },
     {
         path: 'details/:id',
