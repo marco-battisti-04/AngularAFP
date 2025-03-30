@@ -1,29 +1,18 @@
 from flask import Blueprint, jsonify, request
-from models import *
+from handlers import _database_library
+from models import db
 
 # Create a Blueprint
 api = Blueprint('film', __name__)
 
 @api.route('/film', methods=['POST'])
 def create_film():
-
-    # data = request.json
-    # new_film = Film(**data)
-    # db.session.add(new_film)
-    # db.session.commit()
-    # film = Film(title='Test Film 4', year=2023, short_description='Test Description', duration=120, rating=8.5)
-    # film2 = Film(title='Test Film 5', year=2023, short_description='Test Description', duration=120, rating=8.5)
-    # film3 = Film(title='Test Film 6', year=2023, short_description='Test Description', duration=120, rating=8.5)
-
-    # db.session.add(film)
-    # db.session.add(film2)
-    # db.session.add(film3)
-
-    db.session.commit()
-    # return jsonify({"message": "Film created", "id": film.id}), 201
+    return jsonify({"message": "Not implemented" }), 200
+#enddef
 
 @api.route('/genre', methods=['POST'])
 def create_genre():
+    return jsonify({"message": "Not implemented" }), 200
     data = request.json
     new_genre = Genre(**data)
     db.session.add(new_genre)
@@ -45,7 +34,6 @@ def create_genre():
 
 @api.route('/films', methods=['GET'])
 def fetch_all_films():
-    films = Film.query.all()  # Use User.query.all() to fetch all users
-    film_list = [{"id": film.id, "name": film.title} for film in films]
-    return jsonify(film_list), 200
+    films_dict = _database_library()
+    return jsonify(films_dict), 200
 #enddef
