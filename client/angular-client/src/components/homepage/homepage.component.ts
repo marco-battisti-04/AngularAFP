@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { HomeSelectionItemComponent } from '../../utils/components/home-selection-item/home-selection-item.component';
 import { HeaderItemComponent } from '../../utils/components/header-item/header-item.component';
+import { SearchBarItemComponent } from '../../utils/components/search-bar-item/search-bar-item.component';
 
 @Component({
   selector: 'app-homepage',
@@ -12,7 +13,7 @@ import { HeaderItemComponent } from '../../utils/components/header-item/header-i
     FormsModule,
     ReactiveFormsModule,
     HomeSelectionItemComponent,
-    HeaderItemComponent,
+    SearchBarItemComponent,
     ButtonModule,
     InputTextModule
   ],
@@ -23,6 +24,10 @@ import { HeaderItemComponent } from '../../utils/components/header-item/header-i
 export class HomepageComponent implements OnInit {
 
   readonly router = inject(Router);
+
+  header_placeholder: string = "Cerca un film ...";
+  header_link: string = "/search";
+
   first_row_list: any[] = [
     {
       "title": "consigliati",

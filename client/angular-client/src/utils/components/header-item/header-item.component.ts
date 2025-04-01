@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { SearchBarItemComponent } from '../search-bar-item/search-bar-item.component';
 
 @Component({
   selector: 'app-header-item',
@@ -10,14 +11,19 @@ import { InputTextModule } from 'primeng/inputtext';
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    RouterLink,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    SearchBarItemComponent
   ],
   templateUrl: './header-item.component.html',
   styleUrl: './header-item.component.css'
 })
 export class HeaderItemComponent implements OnInit{
+
+  @Input() placeholder: string = '';
+  @Input() link: string = '';
+  @Input() content: string = '';
+
 
   readonly router = inject(Router);
   search_text: string = '';

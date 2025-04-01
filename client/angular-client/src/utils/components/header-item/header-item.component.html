@@ -5,10 +5,11 @@
     </div>
 
     <div class="search-container">
-        <form action="" class="search-form">
-            <input class="search-input" type="text" autocomplete="off" pInputText [(ngModel)]="search_text" name="search_text" placeholder="Cerca un film">
-            <p-button class="search-button" type="submit" (click)="search()">Cerca <span class="pi pi-search"></span></p-button>
-        </form>
+        <app-search-bar-item
+            [placeholder]='placeholder'
+            [link]='link'
+            [content]='content'
+        ></app-search-bar-item>
     </div>
 
     <div class="settings-container">

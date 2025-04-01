@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HeaderItemComponent } from '../../utils/components/header-item/header-item.component';
 
@@ -13,13 +13,15 @@ import { HeaderItemComponent } from '../../utils/components/header-item/header-i
 })
 export class SearchpageComponent implements OnInit {
 
+  readonly route = inject(ActivatedRoute);
+
   query:string = "";
 
-  constructor(private route: ActivatedRoute) { }
+  constructor( ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.query = params['query'];
+      this.query = params['query'] || '';
     });
 
     console.log(this.query)

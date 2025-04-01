@@ -25,6 +25,10 @@ export const routes: Routes = [
         component: FilmlibrarypageComponent
     },
     {
+        path: 'library/:query',
+        component: FilmlibrarypageComponent
+    },
+    {
         path: 'details/:id',
         component: DetailpageComponent
     },

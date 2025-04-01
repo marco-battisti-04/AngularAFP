@@ -1,11 +1,18 @@
 <div class="container">
     <!-- header -->
     <app-header-item
-        [placeholder]='Cerca nella libreria'
-        [link]='/library'>
-
+        [placeholder]='search_placeholder'
+        [link]='search_link'
+        [content]='search_content'
+    >
     </app-header-item>
 
     <div class="page-content">
+        <div class="library-container">
+            @for(item of library_items; track item) {
+                <app-search-item>
+                </app-search-item>
+            }
+        </div>
     </div>
 </div>

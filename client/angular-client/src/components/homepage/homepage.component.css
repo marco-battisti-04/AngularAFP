@@ -7,10 +7,23 @@
 @media (min-width: 601px) {
 
     .page-content {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+
         padding-top: 2.5%;
         justify-content: center;
         align-items: center;
         text-align: center;
+    }
+
+    .hero-container {
+        width: 100%;
+        height: 10%;
+
+        margin-bottom: 2.5%;
     }
 
     .hero-text {
@@ -21,10 +34,18 @@
         font-size: 60px;
     }
 
-    .selection-items-container {
+    .search-container {
+        width: 50%;
+        height: 10%;
 
+        border-radius: 10px;
+
+        background: linear-gradient(to bottom right, #4c4c4c, #101010);
+    }
+
+    .selection-items-container {
         width: 100%;
-        height: 80%;
+        height: 72.5%;
 
         display: flex;
         flex-direction: column;
@@ -32,8 +53,6 @@
         justify-content: center;
         align-items: center;
         justify-items: center;
-
-        margin-top: 2%;
     }
 
     .selection-items-first-row, .selection-items-second-row {
@@ -57,4 +76,60 @@
         justify-content: center;
         align-items: center;
     }
+}
+
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.hero-container span {
+    font-weight: bold;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    font-size: 4rem;
+    --stack-height: calc(100% / var(--stacks) - 1px);
+    --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
+    --clip-top: calc(var(--stack-height) * var(--index));
+    --clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+    clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+    animation: stack 340ms cubic-bezier(.46,.29,0,1.24) 1 backwards calc(var(--index) * 120ms), glitch 2s ease infinite 2s alternate-reverse;
+}
+
+.hero-container span:nth-child(odd) { --glitch-translate: 8px; }
+.hero-container span:nth-child(even) { --glitch-translate: -8px; }
+
+@keyframes stack {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%);
+        text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+    }
+
+    60% {
+        opacity: 0.5;
+        transform: translateX(50%);
+    }
+
+    80% {
+        transform: none;
+        opacity: 1;
+        text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+    }
+
+    100% {
+        text-shadow: none;
+    }
+}
+
+@keyframes glitch {
+    0% {
+        text-shadow: -2px 3px 0 red, 2px -3px 0 blue;
+        transform: translate(var(--glitch-translate));
+    }
+    2% {
+        text-shadow: 2px -3px 0 red, -2px 3px 0 blue;
+    }
+    4%, 100% {  text-shadow: none; transform: none; }
 }
