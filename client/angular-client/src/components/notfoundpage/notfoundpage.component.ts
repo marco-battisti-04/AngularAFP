@@ -13,15 +13,18 @@ import { takeWhile } from 'rxjs/operators';
 })
 export class NotfoundpageComponent implements OnInit {
 
-  readonly router = inject(Router)
+  readonly router = inject(Router);
   seconds: number = 5;
 
   constructor( ) { }
 
   ngOnInit(): void {
-      this.redirect();
+    this.redirect();
   }
 
+  /**
+   * Redirect to home page
+   */
   private async redirect() {
     let seconds = this.seconds
     interval(1000).pipe(
