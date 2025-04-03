@@ -46,10 +46,12 @@ class Film(BaseModel):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    year = db.Column(db.Integer, nullable=False)
+    year = db.Column(db.Integer, nullable=False) # change year into date type
     short_description = db.Column(db.String(1000), nullable=False)
-    duration = db.Column(db.Integer, nullable=False)
+    duration = db.Column(db.Integer, nullable=False) # change duration into string
     rating = db.Column(db.Float, nullable=False)
+
+    #TODO: add image
 
     # Many to many relationship with Author
     authors = db.relationship('Author', secondary=film_author, backref=backref('films', lazy='dynamic'))
