@@ -5,6 +5,10 @@ import json
 
 conn = http.client.HTTPSConnection("moviesdatabase.p.rapidapi.com")
 
+#################
+# RAPIDAPI FUNCTIONS #
+#################
+
 def search_title(query: str = "", exact: bool = False, titleType: str ="movie"):
     exact = "true" if exact else "false"
     url = f"/titles/search/title/{query}?exact={exact}&titleType={titleType}"
@@ -19,15 +23,69 @@ def search_actors(query: str = ""):
     pass
 #enddef
 
-def _database_search(query: str = ""):
+
+######################
+# DATABASE FUNCTIONS #
+######################
+
+#region AUTHORS
+
+def database_all_authors():
+    authors = Author.query.all()
+    result = [item.to_dict() for item in authors]
+    return result
+#enddef
+
+def database_search_author(query: str = ""):
+    authors = Author.query.filter(Author.name.icontains(query)).all()
+    result = [author.to_dict() for author in authors]
+    return result
+#enddef
+
+def database_edit_author():
+    # TODO: implement
     pass
 #enddef
 
-def _database_library():
+def database_delete_author(id: int):
+    # TODO: implement
+    pass
+#enddef
+#endregion AUTHORS
+
+def database_search_genre(query: str = ""):
+    genres = Genre.query.filter(Genre.name.icontains(query)).all()
+    result = [genre.to_dict() for genre in genres]
+    return result
+#enddef
+
+
+
+
+def database_all_films():
     films = Film.query.all()
     result = [film.to_dict() for film in films]
     return result
 #enddef
+
+def database_search_film(query: str = ""):
+    films = Film.query.filter(Film.title.icontains(query))
+    result = [film.to_dict() for film in films]
+    return result
+#enddef
+
+def database_get_film(id: int):
+    object = Film.query.get(id)
+    if object:
+        return object.to_dict()
+    else:
+        return {"message": f"Object with id '{id}' in class '{Film.__name__}' was not found"}
+    #endif
+#enddef
+
+#############
+# UTILITIES #
+#############
 
 async def _api_search(url: str = "", method: str ="GET", body: dict = {}):
     headers = {
