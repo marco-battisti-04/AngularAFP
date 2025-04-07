@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { map, Observable, retry } from 'rxjs';
 import { environment } from '../environments/environment.development';
 
 @Injectable({
@@ -8,8 +8,9 @@ import { environment } from '../environments/environment.development';
 })
 export class WebUtilsService {
   private api_url = environment.api_url
+  readonly http = inject(HttpClient);
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   get<T>(endpoint: string, options?: { headers?: HttpHeaders }): Observable<T> {
     return this.http.get<T>(`${this.api_url}${endpoint}`, options).pipe(

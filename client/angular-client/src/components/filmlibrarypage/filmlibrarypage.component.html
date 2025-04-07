@@ -7,11 +7,13 @@
     >
     </app-header-item>
 
-    <!-- page content -->
+    <!-- page content    -->
     <div class="page-content">
         <div class="library-container">
-            @for(item of library_items; track item) {
-                <app-search-item>
+            @for(item of library_items(); track item) {
+                <app-search-item
+                    [item]="item"
+                >
                 </app-search-item>
             }
         </div>
