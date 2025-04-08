@@ -4,7 +4,7 @@
 clients todo list, possibly do this in order
 
 - [X] make enviroment files
-- [ ] fix signals, dont work
+- [X] fix signals, dont work
 
 - [X] fix & finish home structure
     - [X] finish relative utilities components
