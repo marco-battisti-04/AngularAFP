@@ -54,8 +54,8 @@ class Film(BaseModel):
     adult = db.Column(db.Boolean, default=False, nullable=False)
     backdrop_path = db.Column(db.Text, nullable=True)
 
-    orginal_language = db.Column(db.String(255), nullable=False)
-    orginal_title = db.Column(db.String(255), nullable=False)
+    original_language = db.Column(db.String(255), nullable=False)
+    original_title = db.Column(db.String(255), nullable=False)
     overview = db.Column(db.Text, nullable=False)
     popularity = db.Column(db.Float, nullable=True)
     poster_path = db.Column(db.Text, nullable=True)

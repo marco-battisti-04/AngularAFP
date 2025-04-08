@@ -81,13 +81,13 @@ async def _make_request(url: str, method: str = "GET", headers: dict = {}, body:
         response = requests.get()
 
     if method == "POST":
-
+        pass
     if method == "PUT":
-
+        pass
     if method == "DELETE":
-
+        pass
     if method == "PATCH":
-
+        pass
 
     # await conn.request(method, url, headers=headers)
 

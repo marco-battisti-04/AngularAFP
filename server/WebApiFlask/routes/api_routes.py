@@ -5,23 +5,23 @@ from models import db
 # Create a Blueprint
 api = Blueprint('film', __name__)
 
-@api.route('/film', methods=['POST'])
-def create_film():
-    return jsonify({"message": "Not implemented yet"}), 200
-#enddef
+# @api.route('/film', methods=['POST'])
+# def create_film():
+#     return jsonify({"message": "Not implemented yet"}), 200
+# #enddef
 
-@api.route('/genre', methods=['POST'])
-def create_genre():
-    return jsonify({"message": "Not implemented yet"}), 200
-    data = request.json
-    new_genre = Genre(**data)
-    db.session.add(new_genre)
-    db.session.commit()
-    return jsonify({"message": "Genre created", "id": new_genre.id}), 201
+# @api.route('/genre', methods=['POST'])
+# def create_genre():
+#     return jsonify({"message": "Not implemented yet"}), 200
+#     data = request.json
+#     new_genre = Genre(**data)
+#     db.session.add(new_genre)
+#     db.session.commit()
+#     return jsonify({"message": "Genre created", "id": new_genre.id}), 201
 
-@api.route("/author", methods=["POST"])
-def create_author():
-    return jsonify({"message": "Not implemented yet"}), 200
+# @api.route("/author", methods=["POST"])
+# def create_author():
+#     return jsonify({"message": "Not implemented yet"}), 200
 #enddef
 
 # @api.route('/groups/<int:group_id>/users', methods=['GET'])
@@ -62,7 +62,7 @@ def create_author():
 
 #region ---- LIBRARY ROUTES ----- #
 
-@api.route("/library/title/:query", methods=['GET'])
+@api.route("/library/title/<string:query>", methods=['GET'])
 def library_search_films(query: str = ""):
     return jsonify(database_search_film(query)), 200
 #enddef
@@ -72,18 +72,18 @@ def library_get_films():
     return jsonify(database_all_films()), 200
 #enddef
 
-@api.route("/library/get/:id", methods=['GET'])
+@api.route("/library/get/<int:id>", methods=['GET'])
 def library_get_film(id: int):
     return jsonify({database_get_film(id)}), 200
 #enddef
 
-@api.route("/library/delete/:id", methods=['DELETE'])
+@api.route("/library/delete/<int:id>", methods=['DELETE'])
 def library_delete_film(id: int):
     # return jsonify({"message": database_delete_film(id)}), 200
     pass
 #enddef
 
-@api.route("/library/update/:id", methods=['PUT'])
+@api.route("/library/update/<int:id>", methods=['PUT'])
 def library_update_film(id: int):
     # return jsonify({"message": database_update_film(id)}), 200
     pass
@@ -94,7 +94,7 @@ def library_add_film():
     # return jsonify({"message": database_add_film()}), 200
     response = {}
     # try:
-    film = Film(title="Film 0", year=2023, short_description="test", duration=120, rating=5.0)
+    # film = Film(title="Film 0", year=2023, short_description="test", duration=120, rating=5.0)
 
     # response["message"] = "Film added successfully"
     # response["id"] = 0# film.id
@@ -112,16 +112,33 @@ def library_add_film():
     # genre4 = Genre(name="Genre 4").save()
     # genre5 = Genre(name="Genre 5").save()
 
-    # Film(title="Film 1", year=2023, short_description="test", duration=120, rating=5.0).save()
-    # Film(title="Film 2", year=2023, short_description="test", duration=120, rating=5.0).save()
-    # Film(title="Film 3", year=2023, short_description="test", duration=120, rating=5.0).save()
-    # Film(title="Film 4", year=2023, short_description="test", duration=120, rating=5.0).save()
-    # Film(title="Film 5", year=2023, short_description="test", duration=120, rating=5.0).save()
-    # Film(title="Film 6", year=2023, short_description="test", duration=120, rating=5.0).save()
-    # Film(title="Film 7", year=2023, short_description="test", duration=120, rating=5.0).save()
-    # Film(title="Film 8", year=2023, short_description="test", duration=120, rating=5.0).save()
-    # Film(title="Film 9", year=2023, short_description="test", duration=120, rating=5.0).save()
-    # Film(title="Film 10", year=2023, short_description="test", duration=120, rating=5.0).save()
+    json = {
+      "adult": False,
+      "backdrop_path": "/sd4xN5xi8tKRPrJOWwNiZEile7f.jpg",
+      "movie_api_id": 920,
+      "original_language": "en",
+      "original_title": "Cars",
+      "overview": "Lightning McQueen, a hotshot rookie race car driven to succeed, discovers that life is about the journey, not the finish line, when he finds himself unexpectedly detoured in the sleepy Route 66 town of Radiator Springs. On route across the country to the big Piston Cup Championship in California to compete against two seasoned pros, McQueen gets to know the town's offbeat characters.",
+      "popularity": 11.9447,
+      "poster_path": "/u4G8EkiIBZYx0wEg2xDlXZigTOZ.jpg",
+      "release_date": "2006-06-08",
+      "title": "Cars",
+      "vote_average": 6.993,
+      "vote_count": 14242
+    }
+
+    for i in range(20):
+        json["movie_api_id"] = i
+        Film(**json).save()
+    # Film(**json).save()
+    # Film(**json).save()
+    # Film(**json).save()
+    # Film(**json).save()
+    # Film(**json).save()
+    # Film(**json).save()
+    # Film(**json).save()
+    # Film(**json).save()
+    # Film(**json).save()
 
     # except Exception as e:
     #     response["message"] = "Error while adding the film"
