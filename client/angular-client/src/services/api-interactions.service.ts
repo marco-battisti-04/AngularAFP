@@ -11,7 +11,7 @@ export class ApiInteractionsService {
   constructor(private webUtils: WebUtilsService) { }
 
   search(query: string) {
-
+    return this.webUtils.get<any[]>(`api/film/title/${query}`);
   }
 
   getLibrary(query: string) {
@@ -21,14 +21,5 @@ export class ApiInteractionsService {
     }
 
     return this.webUtils.get<any[]>(endpoint);
-
-      // this.webUtils.get<any[]>(endpoint).subscribe(response => {
-      //   this.listSignal.set(response);
-        
-      //   console.log(this.listSignal());
-      // });
-  }
-
-  clearSignal() {
   }
 }

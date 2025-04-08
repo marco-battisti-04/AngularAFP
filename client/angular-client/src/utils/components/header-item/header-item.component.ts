@@ -23,6 +23,7 @@ export class HeaderItemComponent implements OnInit{
   @Input() placeholder: string = '';
   @Input() link: string = '';
   @Input() content: string = '';
+  @Input() enableNull: boolean = false;
 
 
   readonly router = inject(Router);

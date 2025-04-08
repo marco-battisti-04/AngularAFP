@@ -21,6 +21,7 @@ export class SearchBarItemComponent {
   @Input() placeholder: string = 'Cerca un film ...';
   @Input() link: string = '';
   @Input() content: string = '';
+  @Input() enableNull: boolean = false;
 
 
   readonly router = inject(Router);
@@ -43,7 +44,7 @@ export class SearchBarItemComponent {
 
     if (value != '') {
       this.router.navigate([this.link, this.search_text]);
-    } else {
+    } else if (this.enableNull == true){
       this.router.navigate([this.link]);
     }
   }

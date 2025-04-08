@@ -1,6 +1,11 @@
 <div class="container">
 
-    <app-header-item></app-header-item>
+    <app-header-item
+        [placeholder]='search_placeholder'
+        [link]='search_link'
+        [content]='search_content'
+        [enableNull]='false'
+    ></app-header-item>
 
     <div class="page-content">
         <!-- FIXME: implement -->
