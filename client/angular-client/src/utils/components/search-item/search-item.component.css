@@ -1,7 +1,7 @@
 .container:hover {
     cursor: pointer;
-    scale: 1.1;
-    transition: 0.2s;
+    /* scale: 1.05; */
+    /* transition: 0.2s; */
 }
 
 @media (min-width: 601px) {

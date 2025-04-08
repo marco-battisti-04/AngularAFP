@@ -3,7 +3,6 @@ import { HeaderItemComponent } from '../../utils/components/header-item/header-i
 import { ActivatedRoute } from '@angular/router';
 import { SearchItemComponent } from '../../utils/components/search-item/search-item.component';
 import { ApiInteractionsService } from '../../services/api-interactions.service';
-import { Film } from '../../utils/models/models.models';
 
 @Component({
   selector: 'app-filmlibrarypage',
@@ -27,15 +26,17 @@ export class FilmlibrarypageComponent implements OnInit {
   library_items = signal<any[]>([]);
 
   constructor() {
-    this.library_items = this.apiService.listSignal;
   }
-
+  
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       let query = params['query'] || '';
       this.search_content = query;
-
-      this.apiService.getLibrary(query);
+  
+      this.apiService.getLibrary(query).subscribe(response => {
+        this.library_items.set(response);
+        console.log(this.library_items())
+      });
     });
   }
 }
