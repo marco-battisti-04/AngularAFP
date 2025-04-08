@@ -1,4 +1,33 @@
-<div class="container">
-    <!-- FIXME: implement -->
+<div class="container" id="faded-background" style="background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%), url({{background_link}});">
+    <div class="image-container">
+        <img src="{{ image_link }}" alt="Placeholder" class="poster-image">
+    </div>
 
+    <div class="text-container">
+        <div class="title-container">
+            <span class="title-text">{{ item.title }}</span>
+        </div>
+
+        <div class="genres-container">
+            @for(genre of genres_list(); track genre) {
+                <span class="genre-text">{{genre}}</span>
+            }
+        </div>
+
+        <div class="description-container">
+            <p class="description-text">{{item.overview}}</p>
+        </div>
+    </div>
+
+    <div class="buttons-container">
+        <div class="rows" id="row1">
+            <span class="date-text">Release date: {{ pipedDate | date: "dd/MM/yyyy" }}</span>
+        </div>
+
+        <div class="rows" id="row2">
+            <span class="rating-text">Rating: {{ item.vote_average }}</span>
+        </div>
+    </div>
 </div>
+
+<!-- TODO: make a remove button -->

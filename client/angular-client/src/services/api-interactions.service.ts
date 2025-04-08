@@ -20,6 +20,12 @@ export class ApiInteractionsService {
       endpoint= `/library/title/${query}`
     }
 
+    console.log(endpoint)
+
     return this.webUtils.get<any[]>(endpoint);
+  }
+
+  getGenres(genreIds: number[]) {
+    return this.webUtils.get<any[]>(`api/film/genres/${genreIds.join(',')}`);
   }
 }
