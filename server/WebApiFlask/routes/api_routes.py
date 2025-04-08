@@ -36,6 +36,16 @@ def create_author():
 
 
 
+# THE MOVIE DATABASE
+
+# https://developer.themoviedb.org/reference/search-movie
+# https://developer.themoviedb.org/docs/image-basics
+# https://www.themoviedb.org/settings/api
+# https://developer.themoviedb.org/docs/getting-started
+# https://developer.themoviedb.org/docs/getting-started
+# https://developer.themoviedb.org/reference/search-movie
+
+# https://developer.themoviedb.org/reference/movie-images
 
 # @api.route('/films', methods=['GET'])
 # def fetch_all_films():
