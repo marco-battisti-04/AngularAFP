@@ -63,24 +63,86 @@ def create_author():
 #region ---- LIBRARY ROUTES ----- #
 
 @api.route("/library/title/:query", methods=['GET'])
-def search_films(query: str = ""):
+def library_search_films(query: str = ""):
     return jsonify(database_search_film(query)), 200
 #enddef
 
 @api.route("/library/all", methods=['GET'])
-def get_films():
+def library_get_films():
     return jsonify(database_all_films()), 200
 #enddef
 
-@api.route("/library/:id", methods=['GET'])
-def get_film(id: int):
+@api.route("/library/get/:id", methods=['GET'])
+def library_get_film(id: int):
     return jsonify({database_get_film(id)}), 200
+#enddef
+
+@api.route("/library/delete/:id", methods=['DELETE'])
+def library_delete_film(id: int):
+    # return jsonify({"message": database_delete_film(id)}), 200
+    pass
+#enddef
+
+@api.route("/library/update/:id", methods=['PUT'])
+def library_update_film(id: int):
+    # return jsonify({"message": database_update_film(id)}), 200
+    pass
+#enddef
+
+@api.route("/library/add", methods=['POST'])
+def library_add_film():
+    # return jsonify({"message": database_add_film()}), 200
+    response = {}
+    # try:
+    film = Film(title="Film 0", year=2023, short_description="test", duration=120, rating=5.0)
+
+    # response["message"] = "Film added successfully"
+    # response["id"] = 0# film.id
+    # response['status'] = 200
+
+    # author1 = Author(name="Author 1", surname="test").save()
+    # author2 = Author(name="Author 2", surname="test").save()
+    # author3 = Author(name="Author 3", surname="test").save()
+    # author4 = Author(name="Author 4", surname="test").save()
+    # author5 = Author(name="Author 5", surname="test").save()
+
+    # genre1 = Genre(name="Genre 1").save()
+    # genre2 = Genre(name="Genre 2").save()
+    # genre3 = Genre(name="Genre 3").save()
+    # genre4 = Genre(name="Genre 4").save()
+    # genre5 = Genre(name="Genre 5").save()
+
+    # Film(title="Film 1", year=2023, short_description="test", duration=120, rating=5.0).save()
+    # Film(title="Film 2", year=2023, short_description="test", duration=120, rating=5.0).save()
+    # Film(title="Film 3", year=2023, short_description="test", duration=120, rating=5.0).save()
+    # Film(title="Film 4", year=2023, short_description="test", duration=120, rating=5.0).save()
+    # Film(title="Film 5", year=2023, short_description="test", duration=120, rating=5.0).save()
+    # Film(title="Film 6", year=2023, short_description="test", duration=120, rating=5.0).save()
+    # Film(title="Film 7", year=2023, short_description="test", duration=120, rating=5.0).save()
+    # Film(title="Film 8", year=2023, short_description="test", duration=120, rating=5.0).save()
+    # Film(title="Film 9", year=2023, short_description="test", duration=120, rating=5.0).save()
+    # Film(title="Film 10", year=2023, short_description="test", duration=120, rating=5.0).save()
+
+    # except Exception as e:
+    #     response["message"] = "Error while adding the film"
+    #     response["id"] = -1
+    #     response['status'] = 500
+
+    return jsonify(response), 200
 #enddef
 
 #endregion - LIBRARY ROUTES ----- #
 
 
 
+#region ---- SEARCH ROUTES ----- #
+
+@api.route("/api/film/title/:query", methods=['GET'])
+def api_search_film(query: str = ""):
+    return  jsonify(search_title(query)), 200
+    # return jsonify(database_search_film(query)), 200
+
+#endregion - SEARCH ROUTES ----- #
 
 
 

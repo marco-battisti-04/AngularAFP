@@ -3,23 +3,25 @@ from sqlalchemy.orm import backref
 
 db = SQLAlchemy()
 
-film_author = db.Table(
-    'film_author',
-    db.Model.metadata,
-    db.Column('film_id', db.Integer, db.ForeignKey('film.id'), primary_key=True),
-    db.Column('author_id', db.Integer, db.ForeignKey('author.id'), primary_key=True)
-)
+# film_author = db.Table(
+#     'film_author',
+#     db.Model.metadata,
+#     db.Column('film_id', db.Integer, db.ForeignKey('film.id'), primary_key=True),
+#     db.Column('author_id', db.Integer, db.ForeignKey('author.id'), primary_key=True)
+# )
 
-film_genre = db.Table('film_genre',
-    db.Model.metadata,
-    db.Column('film_id', db.Integer, db.ForeignKey('film.id'), primary_key=True),
-    db.Column('genre_id', db.Integer, db.ForeignKey('genre.id'), primary_key=True)
-)
+# film_genre = db.Table('film_genre',
+#     db.Model.metadata,
+#     db.Column('film_id', db.Integer, db.ForeignKey('film.id'), primary_key=True),
+#     db.Column('genre_id', db.Integer, db.ForeignKey('genre.id'), primary_key=True)
+# )
 
 class BaseModel(db.Model):
 
     __abstract__ = True
     _methods_to_avoid = ['save', 'to_dict']
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement = True)
 
     def __repr__(self):
         return f'<{self._classname} {self.title}>'
@@ -37,6 +39,10 @@ class BaseModel(db.Model):
                 result[key] = value
         return result
     #enddef
+
+    def __repr__(self):
+        return f'<{self._classname} {self.name}>'
+    #enddef
 #endclass
 
 class Film(BaseModel):
@@ -44,49 +50,50 @@ class Film(BaseModel):
     _classname = 'Film'
     __tablename__ = 'film'
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    title = db.Column(db.String(100), nullable=False)
-    year = db.Column(db.Integer, nullable=False) # change year into date type
-    short_description = db.Column(db.String(1000), nullable=False)
-    duration = db.Column(db.Integer, nullable=False) # minutes
-    rating = db.Column(db.Float, nullable=False)
+    movie_api_id = db.Column(db.Integer, nullable=False, unique=True)
+    adult = db.Column(db.Boolean, default=False, nullable=False)
+    backdrop_path = db.Column(db.Text, nullable=True)
 
-    image_link = db.Column(db.Text, nullable=True)
+    orginal_language = db.Column(db.String(255), nullable=False)
+    orginal_title = db.Column(db.String(255), nullable=False)
+    overview = db.Column(db.Text, nullable=False)
+    popularity = db.Column(db.Float, nullable=True)
+    poster_path = db.Column(db.Text, nullable=True)
+    release_date = db.Column(db.Date, nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    runtime = db.Column(db.Integer, nullable=True) # minutes
 
-    # Many to many relationship with Author
-    authors = db.relationship('Author', secondary=film_author, backref=backref('films', lazy='dynamic'))
-
-    # groups = db.relationship("Group", secondary=user_group_association, back_populates="users")
-    # Many to many relationship with Genre
-    genres = db.relationship('Genre', secondary=film_genre, backref=backref('films', lazy='dynamic'))
+    vote_average = db.Column(db.Float, nullable=True)
+    personal_vote = db.Column(db.Float, nullable=True)
+    vote_count = db.Column(db.Integer, nullable=True)
 
     #enddef
 #endclass
 
-class Author(db.Model):
+# class Author(BaseModel):
 
-    _classname = 'Author'
-    __tablename__ = 'author'
+#     _classname = 'Author'
+#     __tablename__ = 'author'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    surname = db.Column(db.String(100), nullable=False)
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(100), nullable=False)
+#     surname = db.Column(db.String(100), nullable=False)
 
-    def __repr__(self):
-        return f'<Author {self.name} {self.surname}>'
-    #enddef
-#endclass
+#     def __repr__(self):
+#         return f'<Author {self.name} {self.surname}>'
+#     #enddef
+# #endclass
 
 
-class Genre(db.Model):
+# class Genre(BaseModel):
 
-    _classname = 'Genre'
-    __tablename__ = 'genre'
+#     _classname = 'Genre'
+#     __tablename__ = 'genre'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(100), nullable=False)
 
-    def __repr__(self):
-        return f'<Genre {self.name}>'
-    #enddef
-#endclass
+#     def __repr__(self):
+#         return f'<Genre {self.name}>'
+#     #enddef
+# #endclass

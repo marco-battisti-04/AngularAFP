@@ -1,17 +1,17 @@
 import http.client
+import requests
 from models import *
 import json
 
 
 conn = http.client.HTTPSConnection("moviesdatabase.p.rapidapi.com")
 
-#################
-# RAPIDAPI FUNCTIONS #
-#################
+##################
+# TMDB FUNCTIONS #
+##################
 
-def search_title(query: str = "", exact: bool = False, titleType: str ="movie"):
-    exact = "true" if exact else "false"
-    url = f"/titles/search/title/{query}?exact={exact}&titleType={titleType}"
+def search_title(query: str = "", page: int = 1, adult: str = "false"):
+    url = f"/search/movie?query={query}&include_adult={adult}&language=en-US&page={page}"
     _api_search(url=url, method="GET")
 #enddef
 
@@ -27,40 +27,6 @@ def search_actors(query: str = ""):
 ######################
 # DATABASE FUNCTIONS #
 ######################
-
-#region AUTHORS
-
-def database_all_authors():
-    authors = Author.query.all()
-    result = [item.to_dict() for item in authors]
-    return result
-#enddef
-
-def database_search_author(query: str = ""):
-    authors = Author.query.filter(Author.name.icontains(query)).all()
-    result = [author.to_dict() for author in authors]
-    return result
-#enddef
-
-def database_edit_author():
-    # TODO: implement
-    pass
-#enddef
-
-def database_delete_author(id: int):
-    # TODO: implement
-    pass
-#enddef
-#endregion AUTHORS
-
-def database_search_genre(query: str = ""):
-    genres = Genre.query.filter(Genre.name.icontains(query)).all()
-    result = [genre.to_dict() for genre in genres]
-    return result
-#enddef
-
-
-
 
 def database_all_films():
     films = Film.query.all()
@@ -89,26 +55,48 @@ def database_get_film(id: int):
 
 async def _api_search(url: str = "", method: str ="GET", body: dict = {}):
     headers = {
-        'x-rapidapi-key': "55ac4600b1msh1c5fb05def23611p1d9dfcjsncc23727ca870",
-        'x-rapidapi-host': "moviesdatabase.p.rapidapi.com"
+        # 'x-rapidapi-key': "55ac4600b1msh1c5fb05def23611p1d9dfcjsncc23727ca870",
+        # 'x-rapidapi-host': "moviesdatabase.p.rapidapi.com"
     }
 
-    if method in ["POST", "PUT", "DELETE", "PATCH", "GET"]:
-        return await _make_request(url, method=method, headers=headers, body=body)
-    else:
-        return {"message": "Method not allowed"}
+    # if method in ["POST", "PUT", "DELETE", "PATCH", "GET"]:
+    #     return await _make_request(url, method=method, headers=headers, body=body)
+    # else:
+    #     return {"message": "Method not allowed"}
 #enddef
 
 async def _make_request(url: str, method: str = "GET", headers: dict = {}, body: dict = {}):
 
-    await conn.request(method, url, headers=headers)
+    
+    base_url = 'https://api.themoviedb.org/3'
+    access_token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMTYwNDc1MDJhZWNiZmNmMTQ2YzVhZjE1Y2Y0Y2U5NCIsIm5iZiI6MTc0NDEwMDc3NC44MjA5OTk5LCJzdWIiOiI2N2Y0ZGRhNjZjMzU4M2M5NzU5OTY3ZjMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.R6Z8-vb9eHc75sMaOHphfs8xEHUcjFlMc5_uU9sAASY"
 
-    res = conn.getresponse()
-    data = res.read()
+    headers = {
+        "accept": "application/json",
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": f"Bearer {access_token}"
+    }
 
-    result = json.loads(data.decode("utf-8"))
+    if method == "GET":
+        response = requests.get()
 
-    return result
+    if method == "POST":
+
+    if method == "PUT":
+
+    if method == "DELETE":
+
+    if method == "PATCH":
+
+
+    # await conn.request(method, url, headers=headers)
+
+    # res = conn.getresponse()
+    # data = res.read()
+
+    # result = json.loads(data.decode("utf-8"))
+
+    # return result
 #enddef
 
 # FIXME: do not commit
