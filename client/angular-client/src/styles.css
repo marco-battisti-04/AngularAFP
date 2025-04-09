@@ -9,7 +9,14 @@
 
 html {
     background-color: #060608;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */
     /* background: linear-gradient(to bottom right, #1d1b1b, #111010); */
+}
+
+::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar width */
+    height: 0; /* Remove scrollbar height */
 }
 
 body {

@@ -14,6 +14,7 @@
             @for(item of library_items(); track item) {
                 <app-search-item
                     [inputItem]="item"
+                    [search]="false"
                 >
                 </app-search-item>
             }

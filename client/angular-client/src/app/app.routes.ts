@@ -29,7 +29,11 @@ export const routes: Routes = [
         component: FilmlibrarypageComponent
     },
     {
-        path: 'details/:id',
+        path: 'search/details/:id',
+        component: DetailpageComponent
+    },
+    {
+        path: 'library/details/:id',
         component: DetailpageComponent
     },
     {

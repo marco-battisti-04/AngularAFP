@@ -8,6 +8,14 @@
     ></app-header-item>
 
     <div class="page-content">
-        <!-- FIXME: implement -->
+        <div class="films-container">
+            @for(item of films_items(); track item) {
+                <app-search-item
+                    [inputItem]="item"
+                    [search]="true"
+                >
+                </app-search-item>
+            }
+        </div>
     </div>
 </div>

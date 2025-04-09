@@ -20,6 +20,7 @@ export class SearchItemComponent implements OnChanges, OnInit {
   readonly router = inject(Router);
 
   @Input() inputItem: any;
+  @Input() search: boolean = false;
   item: any;
 
   image_link = `/assets/images/no-poster.jpg`;
@@ -27,7 +28,7 @@ export class SearchItemComponent implements OnChanges, OnInit {
   genres_list = signal<string[]>([]);
 
   image_url = environment.image_url;
-  pipedDate = new Date()
+  pipedDate = new Date();
 
   constructor() { }
 
@@ -48,10 +49,40 @@ export class SearchItemComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['inputItem']) {
       this.item = changes['inputItem'].currentValue;
+
+      this.background_link = `${this.image_url}${this.item.backdrop_path}`;
+      this.image_link = `${this.image_url}${this.item.poster_path}`;
+      this.item.title = this.item.title.toUpperCase();
+      this.pipedDate = new Date(this.item.release_date);
+
     }
   }
 
   detail() {
-    this.router.navigate(['/details', this.item.id]);
+    let endpoint = "/library/details"
+    if ( this.search ) {
+      endpoint = "/search/details"
+    }
+    this.router.navigate([endpoint, this.item.id]);
   }
+
+
+  addToLibrary() {
+    console.log(this.item);
+    this.apiService.addToLibrary(this.item).subscribe((response) => {
+      console.log(response);
+      this.router.navigate(['/library']);
+    });
+  }
+
+  removeFromLibrary() {
+    console.log(this.item);
+    this.apiService.removeFromLibrary(this.item).subscribe((response) => {
+      console.log(response);
+      // this.router.navigate(['/library']);
+
+      window.location.reload();
+    });
+  }
+
 }

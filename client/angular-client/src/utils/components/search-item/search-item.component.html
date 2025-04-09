@@ -3,7 +3,7 @@
         <img src="{{ image_link }}" alt="Placeholder" class="poster-image">
     </div>
 
-    <div class="text-container">
+    <div class="text-container" (click)="detail()">
         <div class="title-container">
             <span class="title-text">{{ item.title }}</span>
         </div>
@@ -27,6 +27,19 @@
         <div class="rows" id="row2">
             <span class="rating-text">Rating: {{ item.vote_average }}</span>
         </div>
+
+        @if (search == true) {
+            <div class="buttons" id="add-library" (click)="addToLibrary()">
+                <span class="button-text">Add to library</span>
+            </div>
+        }
+
+        @if (search == false) {
+
+            <div class="buttons" id="remove-library" (click)="removeFromLibrary()">
+                <span class="button-text">Remove from library</span>
+            </div>
+        }
     </div>
 </div>
 

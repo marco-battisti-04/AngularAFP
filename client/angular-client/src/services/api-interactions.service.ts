@@ -6,12 +6,10 @@ import { WebUtilsService } from './web-utils.service';
 })
 export class ApiInteractionsService {
 
-  // listSignal = signal<any[]>([]);
-
   constructor(private webUtils: WebUtilsService) { }
 
   search(query: string) {
-    return this.webUtils.get<any[]>(`api/film/title/${query}`);
+    return this.webUtils.get<any[]>(`/api/film/title/${query}`);
   }
 
   getLibrary(query: string) {
@@ -20,12 +18,18 @@ export class ApiInteractionsService {
       endpoint= `/library/title/${query}`
     }
 
-    console.log(endpoint)
-
     return this.webUtils.get<any[]>(endpoint);
   }
 
+  addToLibrary(item: any) {
+    return this.webUtils.post('/library/add', { film: item });
+  }
+
+  removeFromLibrary(item: any) {
+    return this.webUtils.post('/library/remove', { film: item });
+  }
+
   getGenres(genreIds: number[]) {
-    return this.webUtils.get<any[]>(`api/film/genres/${genreIds.join(',')}`);
+    return this.webUtils.get<any[]>(`/api/film/genres/${genreIds.join(',')}`);
   }
 }
