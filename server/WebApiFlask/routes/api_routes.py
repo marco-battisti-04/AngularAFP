@@ -77,10 +77,18 @@ def library_get_film(id: int):
     return jsonify({database_get_film(id)}), 200
 #enddef
 
-@api.route("/library/delete/<int:id>", methods=['DELETE'])
-def library_delete_film(id: int):
-    # return jsonify({"message": database_delete_film(id)}), 200
-    pass
+@api.route("/library/remove", methods=['POST'])
+def library_delete_film():
+
+    data = request.json.get('film')
+    film = Film.query.get(data['id'])
+    film.delete()
+
+    response = {
+        "message": "Film deleted successfully",
+        "status": 200
+    }
+    return jsonify(response), 200
 #enddef
 
 @api.route("/library/update/<int:id>", methods=['PUT'])
@@ -91,61 +99,40 @@ def library_update_film(id: int):
 
 @api.route("/library/add", methods=['POST'])
 def library_add_film():
-    # return jsonify({"message": database_add_film()}), 200
-    response = {}
-    # try:
-    # film = Film(title="Film 0", year=2023, short_description="test", duration=120, rating=5.0)
 
-    # response["message"] = "Film added successfully"
-    # response["id"] = 0# film.id
-    # response['status'] = 200
+    try:
 
-    # author1 = Author(name="Author 1", surname="test").save()
-    # author2 = Author(name="Author 2", surname="test").save()
-    # author3 = Author(name="Author 3", surname="test").save()
-    # author4 = Author(name="Author 4", surname="test").save()
-    # author5 = Author(name="Author 5", surname="test").save()
+        data = request.json.get('film')
 
-    # genre1 = Genre(name="Genre 1").save()
-    # genre2 = Genre(name="Genre 2").save()
-    # genre3 = Genre(name="Genre 3").save()
-    # genre4 = Genre(name="Genre 4").save()
-    # genre5 = Genre(name="Genre 5").save()
+        data['genre_ids'] = ','.join(map(str, data.get('genre_ids', [])))
 
-    json = {
-      "adult": False,
-      "backdrop_path": "/sd4xN5xi8tKRPrJOWwNiZEile7f.jpg",
-      "movie_api_id": 920,
-      "original_language": "en",
-      "original_title": "Cars",
-      "overview": "Lightning McQueen, a hotshot rookie race car driven to succeed, discovers that life is about the journey, not the finish line, when he finds himself unexpectedly detoured in the sleepy Route 66 town of Radiator Springs. On route across the country to the big Piston Cup Championship in California to compete against two seasoned pros, McQueen gets to know the town's offbeat characters.",
-      "popularity": 11.9447,
-      "poster_path": "/u4G8EkiIBZYx0wEg2xDlXZigTOZ.jpg",
-      "release_date": "2006-06-08",
-      "title": "Cars",
-      "vote_average": 6.993,
-      "vote_count": 14242
-    }
+        object = {}
 
-    for i in range(20):
-        json["movie_api_id"] = i
-        Film(**json).save()
-    # Film(**json).save()
-    # Film(**json).save()
-    # Film(**json).save()
-    # Film(**json).save()
-    # Film(**json).save()
-    # Film(**json).save()
-    # Film(**json).save()
-    # Film(**json).save()
-    # Film(**json).save()
+        for key, value in data.items():
+            if key == "id":
+                object["movie_api_id"] = value
+            elif key != "id" and key not in ['video']:
+                object[key] = value
+            #endif
+        #endfor
 
-    # except Exception as e:
-    #     response["message"] = "Error while adding the film"
-    #     response["id"] = -1
-    #     response['status'] = 500
+        film = Film(**object)
+        film.save()
 
-    return jsonify(response), 200
+        response = {
+            "message": "Film added successfully",
+            "id": film.id,
+            "status": 200
+        }
+        return jsonify(response), 200
+    except Exception as e:
+        response = {
+            "message": "Error while adding the film or duplicated entry",
+            "id": -1,
+            "status": 500
+        }
+        return jsonify(response), 200
+    #endtry
 #enddef
 
 #endregion - LIBRARY ROUTES ----- #
@@ -154,7 +141,7 @@ def library_add_film():
 
 #region ---- SEARCH ROUTES ----- #
 
-@api.route("/api/film/title/:query", methods=['GET'])
+@api.route("/api/film/title/<string:query>", methods=['GET'])
 def api_search_film(query: str = ""):
     return  jsonify(search_title(query)), 200
     # return jsonify(database_search_film(query)), 200

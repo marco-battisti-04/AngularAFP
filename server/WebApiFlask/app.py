@@ -44,7 +44,7 @@ app.register_blueprint(swagger, url_prefix=swagger_prefix)
 
 # CREATE DATABASE STRUCTURE
 # from models import *# User, Group  # Import your models
-# # Create the database tables
+# fu# Create the database tables
 # with app.app_context():
 #     db.create_all()
 

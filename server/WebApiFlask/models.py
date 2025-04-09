@@ -32,6 +32,12 @@ class BaseModel(db.Model):
         db.session.commit()
     #enddef
 
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+    #enddef
+
     def to_dict(self):
         result = {}
         for key, value in vars(self).items():
@@ -54,6 +60,7 @@ class Film(BaseModel):
     adult = db.Column(db.Boolean, default=False, nullable=False)
     backdrop_path = db.Column(db.Text, nullable=True)
 
+    genre_ids = db.Column(db.Text, nullable=True) # comma separated list of genre ids
     original_language = db.Column(db.String(255), nullable=False)
     original_title = db.Column(db.String(255), nullable=False)
     overview = db.Column(db.Text, nullable=False)
