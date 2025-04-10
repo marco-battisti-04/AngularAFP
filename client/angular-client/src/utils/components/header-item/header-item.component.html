@@ -2,16 +2,28 @@
 
     <div class="logo-container">
         <!-- FIXME: implement -->
+        <div style="margin-left: 2.5%; background-color: white; border-radius: 5px; padding: 10px; height: 60%; display: flex; justify-content: center; align-items: center;">
+            <img class="logo" (click)="home()" style="height: 100%;" src="/assets/svgs/home.svg" alt="Logo" />
+        </div>
+        
     </div>
 
-    <div class="search-container">
-        <app-search-bar-item
-            [placeholder]='placeholder'
-            [link]='link'
-            [content]='content'
-            [enableNull]='enableNull'
-        ></app-search-bar-item>
-    </div>
+    @if (enableSearch == true) {
+        <div class="search-container">
+            <app-search-bar-item
+                [placeholder]='placeholder'
+                [link]='link'
+                [content]='content'
+                [enableNull]='enableNull'
+            ></app-search-bar-item>
+        </div>
+    }
+
+    @if (enableSearch == false) {
+        <div class="title-container">
+            <span class="title-text">{{title}}</span>
+        </div>
+    }
 
     <div class="settings-container">
         <!-- FIXME: implement -->

@@ -24,7 +24,8 @@ export class HeaderItemComponent implements OnInit{
   @Input() link: string = '';
   @Input() content: string = '';
   @Input() enableNull: boolean = false;
-
+  @Input() enableSearch: boolean = true;
+  @Input() title: string = '';
 
   readonly router = inject(Router);
   search_text: string = '';
@@ -44,5 +45,9 @@ export class HeaderItemComponent implements OnInit{
     if (value != '') {
       this.router.navigate(['/search', this.search_text]);
     }
+  }
+
+  home() {
+    this.router.navigate(['/']);
   }
 }

@@ -61,7 +61,8 @@ export class SearchItemComponent implements OnChanges, OnInit {
   detail() {
     let endpoint = "/library/details"
     if ( this.search ) {
-      endpoint = "/search/details"
+      return;
+      // endpoint = "/search/details"
     }
     this.router.navigate([endpoint, this.item.id]);
   }

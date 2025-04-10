@@ -1,3 +1,97 @@
 <div class="container">
     <!-- FIXME: implement -->
+    @if(popup_visible == false) {
+
+        <app-header-item
+            [enableSearch]='enableSearch'>
+        </app-header-item>
+
+        <div class="page-content" id="faded-background" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.950) 10%, rgba(0, 0, 0, 0.800) 100%), url({{background_url}});">
+            <div class="poster-infos-container">
+                <div class="poster-container">
+                    <img class="poster-image" src="{{image_url}}{{item().poster_path}}" alt="">
+                </div>
+
+                <div class="infos-container">
+                    <div class="infos-item">
+                        <span class="infos">Rating: {{item().vote_average}} </span>
+                    </div>
+
+                    <div class="infos-item">
+                        <span class="infos">Release date: {{pipedDate | date: "dd/MM/yyyy"}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-container">
+                <div class="title-container">
+                    <h1 class="title">{{item().title}}</h1>
+                </div>
+
+                <div class="description-container">
+
+                    <p class="description">{{item().overview}}</p>
+
+                </div>
+
+                <div class="comments-container">
+                    <div class="comment-header">
+                        <span class="comment-title">Commenti sul film:</span>
+
+                        <div class="buttons-comment-container">
+                            <button style="padding: 1.5%; border-radius: 10px; border: none; background-color: rgb(17, 204, 17);" (click)="togglePopup()">
+                                Aggiungi commento
+                            </button>
+                        </div>
+                    </div>
+                    <div class="comment-content" style="gap: 40px;">
+                        @for(comment of comments_list(); track comment) {
+                            <div style="gap: 10px; margin-top: 15px; width: 90%; height: 95%; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 10px; background-color: rgba(0, 0, 0); margin-top: 5%; padding: 2%;">
+                                <div class="name-container" style="width: 100%; height: 10%; display: flex; justify-content: space-between; align-items: center;">
+                                    <span class="name">Name: {{comment.name}}</span>
+                                    <span>Rating: {{comment.rating}}</span>
+                                </div>
+    
+                                <div class="comment-description" style="width: 100%; height: 90%; display: flex; justify-content: flex-start; align-items: center;">
+                                    <p class="comment">{{comment.description}}</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if(popup_visible == true) {
+        <div class="popup-container"  id="faded-background" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.950) 10%, rgba(0, 0, 0, 0.800) 100%), url({{background_url}});">
+            <form [formGroup]="form" (ngSubmit)="addComment()" style="width: 100%; height: 100%; display: flex; flex-direction: column;">
+                <div class="popup-name-container">
+                    <h1 style=" font-size: 2.5rem; color: #ffffff; font-weight: bold; width: 100%; text-align: center;" >Aggiungi commento</h1>
+                    <label style="font-size: large ; margin-top: 7%; width: 100%; text-align: center;">
+                        Nome:
+                        <input style="width: 25%; height: 1.5rem;" type="text" formControlName="name">
+                    </label>
+
+                    <label style="margin-top: 2%; width: 100%; text-align: center;">
+
+                        Valutazione:
+                        <input style="width: 7%; height: 1.5rem;" type="number" formControlName="rating" min="1" max="10" value="0">
+                    </label>
+
+                </div>
+
+                <div class="popup-comment-container">
+                    <textarea formControlName="description"></textarea>
+                </div>
+
+                <div class="buttons-container">
+                    <button class="popup-buttons" style="background-color: rgb(17, 204, 17);" type="submit">Aggiungi commento</button>
+                    <button class="popup-buttons" style="background-color: rgb(204, 17, 17);" (click)="togglePopup()">Annulla</button>
+                </div>
+
+            </form>
+        </div>
+    }
 </div>
+

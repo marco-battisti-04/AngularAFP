@@ -29,7 +29,18 @@ export class ApiInteractionsService {
     return this.webUtils.post('/library/remove', { film: item });
   }
 
+  getLibraryItem(id: number) {
+    return this.webUtils.get<any>(`/library/get/${id}`);
+  }
+
   getGenres(genreIds: number[]) {
     return this.webUtils.get<any[]>(`/api/film/genres/${genreIds.join(',')}`);
+  }
+
+  getComments(id: number) {
+    return this.webUtils.get<any[]>(`/library/comments/film/${id}`);
+  }
+  addComment(comment: any) {
+    return this.webUtils.post(`/library/comment/add`, { comment: comment });
   }
 }
