@@ -77,6 +77,17 @@ class Film(BaseModel):
     #enddef
 #endclass
 
+class Comment(BaseModel):
+
+    _classname = 'Comment'
+    __tablename__ = 'comment'
+
+    film_id = db.Column(db.Integer, db.ForeignKey('film.id'), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.Text, nullable=False)
+#endclass
+
 # class Author(BaseModel):
 
 #     _classname = 'Author'

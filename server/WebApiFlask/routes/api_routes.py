@@ -74,7 +74,11 @@ def library_get_films():
 
 @api.route("/library/get/<int:id>", methods=['GET'])
 def library_get_film(id: int):
-    return jsonify({database_get_film(id)}), 200
+    object = Film.query.get(id)
+    if object:
+        return object.to_dict()
+
+    # return jsonify({database_get_film(id)}), 200
 #enddef
 
 @api.route("/library/remove", methods=['POST'])
@@ -101,13 +105,12 @@ def library_update_film(id: int):
 def library_add_film():
 
     try:
-
         data = request.json.get('film')
-
         data['genre_ids'] = ','.join(map(str, data.get('genre_ids', [])))
-
         object = {}
 
+        # switch the object fields from "id" to "movie_api_id"
+        # and remove the "video" field
         for key, value in data.items():
             if key == "id":
                 object["movie_api_id"] = value
@@ -134,6 +137,28 @@ def library_add_film():
         return jsonify(response), 200
     #endtry
 #enddef
+
+@api.route("/library/comments/film/<int:id>", methods=['GET'])
+def library_get_comments(id: int):
+    object = Comment.query.filter(Comment.film_id == id).all()
+
+    result = [o.to_dict() for o in object]
+    return jsonify(result), 200
+
+@api.route("/library/comment/add", methods=['POST'])
+def library_add_comment():
+    data = request.json.get('comment')
+    object = Comment(**data)
+
+    print(object.to_dict())
+    object.save()
+
+    response = {
+        "message": "Comment added successfully",
+        "id": object.id,
+        "status": 200
+    }
+    return jsonify(response), 200
 
 #endregion - LIBRARY ROUTES ----- #
 

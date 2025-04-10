@@ -41,12 +41,7 @@ def database_search_film(query: str = ""):
 #enddef
 
 def database_get_film(id: int):
-    object = Film.query.get(id)
-    if object:
-        return object.to_dict()
-    else:
-        return {"message": f"Object with id '{id}' in class '{Film.__name__}' was not found"}
-    #endif
+    pass
 #enddef
 
 #############
