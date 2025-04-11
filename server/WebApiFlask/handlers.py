@@ -11,7 +11,7 @@ conn = http.client.HTTPSConnection("moviesdatabase.p.rapidapi.com")
 ##################
 
 def search_title(query: str = "", page: int = 1, adult: str = "false"):
-    url = f"/search/movie?query={query}&include_adult={adult}&language=it-IT&page={page}"
+    url = f"/search/movie?query={query}&include_adult={adult}&language=en-US&page={page}"
     return _api_search(url=url, method="GET")
 #enddef
 
@@ -59,11 +59,6 @@ def _api_search(url: str = "", method: str ="GET", body: dict = {}):
     }
 
     return _make_request(url, method=method, headers=headers, body=body)
-
-    # if method in ["POST", "PUT", "DELETE", "PATCH", "GET"]:
-    #     return await _make_request(url, method=method, headers=headers, body=body)
-    # else:
-    #     return {"message": "Method not allowed"}
 #enddef
 
 def _make_request(url: str, method: str = "GET", headers: dict = {}, body: dict = {}):
