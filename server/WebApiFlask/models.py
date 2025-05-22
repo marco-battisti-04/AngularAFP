@@ -60,6 +60,16 @@ class Film(BaseModel):
     vote_average = db.Column(db.Float, nullable=True)
     personal_vote = db.Column(db.Float, nullable=True)
     vote_count = db.Column(db.Integer, nullable=True)
+
+    def delete(self):
+
+        # Delete all comments associated with this film
+        comments = Comment.query.filter_by(film_id=self.id).all()
+        for comment in comments:
+            db.session.delete(comment)
+        #endfor
+
+        return super().delete()
 #endclass
 
 class Comment(BaseModel):
