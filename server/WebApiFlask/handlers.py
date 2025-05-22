@@ -3,6 +3,7 @@ import requests
 from models import *
 import json
 
+import configparser
 
 conn = http.client.HTTPSConnection("moviesdatabase.p.rapidapi.com")
 
@@ -50,7 +51,12 @@ def database_get_film(id: int):
 
 def _api_search(url: str = "", method: str ="GET", body: dict = {}):
 
-    access_token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMTYwNDc1MDJhZWNiZmNmMTQ2YzVhZjE1Y2Y0Y2U5NCIsIm5iZiI6MTc0NDEwMDc3NC44MjA5OTk5LCJzdWIiOiI2N2Y0ZGRhNjZjMzU4M2M5NzU5OTY3ZjMiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.R6Z8-vb9eHc75sMaOHphfs8xEHUcjFlMc5_uU9sAASY"
+
+    # Read the configuration file
+    config = configparser.ConfigParser()
+    config.read('application.cfg')
+
+    access_token = str(config['Database']['API_KEY_TOKEN'])
 
     headers = {
         "accept": "application/json",
@@ -70,27 +76,6 @@ def _make_request(url: str, method: str = "GET", headers: dict = {}, body: dict 
 
         data = json.loads(response.text)
         return data['results']
-
-        # return response.text
-    if method == "POST":
-        pass
-    if method == "PUT":
-        pass
-    if method == "DELETE":
-        pass
-    if method == "PATCH":
-        pass
-
-    # await conn.request(method, url, headers=headers)
-
-    # res = conn.getresponse()
-    # data = res.read()
-
-    # result = json.loads(data.decode("utf-8"))
-
-    # return result
+    #endif
 #enddef
-
-# FIXME: do not commit
-# https://rapidapi.com/SAdrian/api/moviesdatabase/playground/apiendpoint_ac984b70-5a8c-4b09-9ef8-8a4e52389c47
 
