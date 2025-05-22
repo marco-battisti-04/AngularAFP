@@ -23,48 +23,38 @@ import { SearchBarItemComponent } from '../../utils/components/search-bar-item/s
 })
 export class HomepageComponent implements OnInit {
 
-  readonly router = inject(Router);
+  // Header items
+  hero_text: string = 'IL TUO CATALOGO PERSONALE'; // Title of the page
+  header_placeholder: string = "Cerca un film ..."; // Placeholder for the search bar
+  header_link: string = "/search"; // Link for the search bar
 
-  header_placeholder: string = "Cerca un film ...";
-  header_link: string = "/search";
-
+  // rows list for the buttons
   first_row_list: any[] = [
-    // {
-    //   "title": "consigliati",
-    //   "url": "/recommended"
-    // },
+    {
+      "title": "consigliati",
+      "url": "/recommended"
+    },
     {
       "title": "libreria",
       "url": "/library"
     },
-    // {
-    //   "title": "preferiti",
-    //   "url": "/favourites"
-    // }
+    {
+      "title": "preferiti",
+      "url": "/favourites"
+    }
   ]
 
   second_row_list: any[] = [
-    // {
-    //   "title": "da vedere",
-    //   "url": "/watchlist"
-    // },
-    // {
-    //   "title": "impostazioni",
-    //   "url": "/settings"
-    // }
+    {
+      "title": "da vedere",
+      "url": "/watchlist"
+    },
+    {
+      "title": "impostazioni",
+      "url": "/settings"
+    }
   ]
 
-
-  hero_text: string = 'IL TUO CATALOGO PERSONALE';
-
-  search_text: string = '';
-  form!: FormGroup;
-
   constructor() { }
-
-  ngOnInit() {
-    this.form = new FormGroup({
-      search_text: new FormControl('')
-    });
-  }
+  ngOnInit() { }
 }

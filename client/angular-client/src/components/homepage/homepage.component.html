@@ -2,12 +2,14 @@
 
     <div class="page-content">
 
+        <!-- title container -->
         <div class="hero-container" style="--stacks: 3;">
             <span style="--index: 0;">{{hero_text}}</span>
             <span style="--index: 1;">{{hero_text}}</span>
             <span style="--index: 2;">{{hero_text}}</span>
         </div>
 
+        <!-- search container -->
         <div class="search-container">
             <app-search-bar-item
                 [placeholder]='header_placeholder'
@@ -17,7 +19,10 @@
             </app-search-bar-item>
         </div>
 
+        <!-- buttons container -->
         <div class="selection-items-container">
+
+            <!-- first row -->
             <div class="selection-items-first-row">
                 @for(item of first_row_list; track item) {
                     <app-home-selection-item
@@ -28,6 +33,7 @@
                 }
             </div>
 
+            <!-- second row -->
             <div class="selection-items-second-row">
                 @for(item of second_row_list; track item) {
                     <app-home-selection-item
