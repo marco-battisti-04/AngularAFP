@@ -27,16 +27,21 @@ export class FilmlibrarypageComponent implements OnInit {
 
   constructor() {
   }
-  
+
   ngOnInit(): void {
+    this.loadpage();
+  }
+
+  loadpage() {
     this.route.params.subscribe(params => {
       let query = params['query'] || '';
       this.search_content = query;
-  
+
       this.apiService.getLibrary(query).subscribe(response => {
         this.library_items.set(response);
         console.log(this.library_items())
       });
     });
+
   }
 }

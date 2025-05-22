@@ -44,7 +44,7 @@ export class DetailpageComponent implements OnInit {
 
 
   pipedDate = new Date();
-  form!: FormGroup;
+    form!: FormGroup;
 
   constructor() {}
 

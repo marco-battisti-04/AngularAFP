@@ -82,7 +82,7 @@ export class SearchItemComponent implements OnChanges, OnInit {
       console.log(response);
       // this.router.navigate(['/library']);
 
-      window.location.reload();
+      window.location.reload(); // brutta
     });
   }
 

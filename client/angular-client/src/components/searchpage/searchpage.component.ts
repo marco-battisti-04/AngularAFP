@@ -36,7 +36,6 @@ export class SearchpageComponent implements OnInit {
         this.films_items.set(response);
         console.log(this.films_items());
       })
-
     });
   }
 
