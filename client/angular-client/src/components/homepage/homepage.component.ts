@@ -29,32 +29,31 @@ export class HomepageComponent implements OnInit {
   header_link: string = "/search";
 
   first_row_list: any[] = [
-    {
-      "title": "consigliati",
-      "url": "/recommended"
-    },
+    // {
+    //   "title": "consigliati",
+    //   "url": "/recommended"
+    // },
     {
       "title": "libreria",
       "url": "/library"
     },
-    {
-      "title": "preferiti",
-      "url": "/favourites"
-    }
+    // {
+    //   "title": "preferiti",
+    //   "url": "/favourites"
+    // }
   ]
 
   second_row_list: any[] = [
-    {
-      "title": "da vedere",
-      "url": "/watchlist"
-    },
-    {
-      "title": "impostazioni",
-      "url": "/settings"
-    }
+    // {
+    //   "title": "da vedere",
+    //   "url": "/watchlist"
+    // },
+    // {
+    //   "title": "impostazioni",
+    //   "url": "/settings"
+    // }
   ]
-  // first_row_list: any[] = ["consigliati","libreria","preferiti"];
-  // second_row_list: any[] =["da vedere", "impostazioni"];
+
 
   hero_text: string = 'IL TUO CATALOGO PERSONALE';
 
