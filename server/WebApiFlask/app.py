@@ -12,9 +12,11 @@ import configparser
 config = configparser.ConfigParser()
 config.read('application.cfg')
 
+version = int(config['App']['VERSION'])
+
 # api prefix
-api_prefix = f'/api/v{int(config["App"]["VERSION"])}'
-swagger_prefix = f'/swagger/v{int(config["App"]["VERSION"])}'
+api_prefix = f'/api/v{version}'
+swagger_prefix = f'/swagger/v{version}'
 
 # Database URI
 DATABASE_URI = config['Database']['SQLALCHEMY_DATABASE_URI']

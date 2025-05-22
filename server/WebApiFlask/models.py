@@ -3,19 +3,6 @@ from sqlalchemy.orm import backref
 
 db = SQLAlchemy()
 
-# film_author = db.Table(
-#     'film_author',
-#     db.Model.metadata,
-#     db.Column('film_id', db.Integer, db.ForeignKey('film.id'), primary_key=True),
-#     db.Column('author_id', db.Integer, db.ForeignKey('author.id'), primary_key=True)
-# )
-
-# film_genre = db.Table('film_genre',
-#     db.Model.metadata,
-#     db.Column('film_id', db.Integer, db.ForeignKey('film.id'), primary_key=True),
-#     db.Column('genre_id', db.Integer, db.ForeignKey('genre.id'), primary_key=True)
-# )
-
 class BaseModel(db.Model):
 
     __abstract__ = True
@@ -73,8 +60,6 @@ class Film(BaseModel):
     vote_average = db.Column(db.Float, nullable=True)
     personal_vote = db.Column(db.Float, nullable=True)
     vote_count = db.Column(db.Integer, nullable=True)
-
-    #enddef
 #endclass
 
 class Comment(BaseModel):
@@ -87,31 +72,3 @@ class Comment(BaseModel):
     rating = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text, nullable=False)
 #endclass
-
-# class Author(BaseModel):
-
-#     _classname = 'Author'
-#     __tablename__ = 'author'
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(100), nullable=False)
-#     surname = db.Column(db.String(100), nullable=False)
-
-#     def __repr__(self):
-#         return f'<Author {self.name} {self.surname}>'
-#     #enddef
-# #endclass
-
-
-# class Genre(BaseModel):
-
-#     _classname = 'Genre'
-#     __tablename__ = 'genre'
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(100), nullable=False)
-
-#     def __repr__(self):
-#         return f'<Genre {self.name}>'
-#     #enddef
-# #endclass
