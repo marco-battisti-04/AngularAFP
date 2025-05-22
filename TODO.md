@@ -10,13 +10,13 @@ clients todo list, possibly do this in order
     - [X] finish relative utilities components
 
 - [X] fix & finish library structure
-    - [ ] finish relative utilities components
+    - [X] finish relative utilities components
 
-- [ ] search page structure
-    - [ ] finish relative utilities components
+- [X] search page structure
+    - [X] finish relative utilities components
 
-- [ ] detail page structure
-    - [ ] finish relative utilities components
+- [X] detail page structure
+    - [X] finish relative utilities components
 
 - [ ] add new entry page structure
     - [ ] finish relative utilities components
