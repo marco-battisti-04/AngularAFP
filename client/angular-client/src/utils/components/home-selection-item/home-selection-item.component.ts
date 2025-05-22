@@ -24,6 +24,10 @@ export class HomeSelectionItemComponent implements OnInit {
   }
 
   redirect() {
-    this.router.navigate([this.item.url]);
+    if (this.item.url.startsWith('https://')) {
+      window.open(this.item.url, '_blank');
+    } else {
+      this.router.navigate([this.item.url]);
+    }
   }
 }

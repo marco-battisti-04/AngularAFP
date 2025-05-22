@@ -31,23 +31,23 @@ export class HomepageComponent implements OnInit {
   // rows list for the buttons
   first_row_list: any[] = [
     {
-      "title": "consigliati",
-      "url": "/recommended"
+      "title": "informazioni", // consigliati
+      "url": "https://github.com/marco-battisti-04/AngularAFP/blob/main/client/client.md" // /recommended
     },
     {
       "title": "libreria",
       "url": "/library"
     },
     {
-      "title": "preferiti",
-      "url": "/favourites"
+      "title": "github", // preferiti
+      "url": "https://github.com/marco-battisti-04/AngularAFP" // /favourites
     }
   ]
 
   second_row_list: any[] = [
     {
-      "title": "da vedere",
-      "url": "/watchlist"
+      "title": "segnala un problema", // da vedere
+      "url": "https://github.com/marco-battisti-04/AngularAFP/issues" // /watchlist
     },
     {
       "title": "impostazioni",
