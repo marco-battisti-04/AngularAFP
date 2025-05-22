@@ -16,37 +16,33 @@ import { SearchItemComponent } from '../../utils/components/search-item/search-i
 })
 export class SearchpageComponent implements OnInit {
 
-  readonly route = inject(ActivatedRoute);
-  readonly apiService = inject(ApiInteractionsService);
+  readonly route = inject(ActivatedRoute); // Injecting the ActivatedRoute service to access route parameters
+  readonly apiService = inject(ApiInteractionsService); // Injecting the ApiInteractionsService to interact with the API
 
-  search_placeholder: string = 'Cerca un film ...';
-  search_link: string = '/search';
-  search_content: string = '';
+  search_placeholder: string = 'Cerca un film ...'; // Placeholder for the search bar
+  search_link: string = '/search'; // Link for the search bar
+  search_content: string = ''; // Search content
 
-  films_items = signal<any[]>([]);
+  films_items = signal<any[]>([]); // Films list
 
   constructor( ) { }
 
   ngOnInit(): void {
+    this.loadPage(); // calls the page loading
+  }
+
+  /**
+   * Loads the page with the search results
+   * based on the query parameter.
+   */
+  loadPage(): void {
     this.route.params.subscribe(params => {
       let query = params['query'] || '';
       this.search_content = query;
 
       this.apiService.search(query).subscribe(response => {
         this.films_items.set(response);
-        console.log(this.films_items());
       })
     });
   }
-
-  // ngOnInit(): void {
-  //   this.route.params.subscribe(params => {
-  //     let query = params['query'] || '';
-  
-  //     this.apiService.getLibrary(query).subscribe(response => {
-  //       this.library_items.set(response);
-  //       console.log(this.library_items())
-  //     });
-  //   });
-  // }
 }

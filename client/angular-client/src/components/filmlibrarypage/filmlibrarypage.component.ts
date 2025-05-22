@@ -16,30 +16,31 @@ import { ApiInteractionsService } from '../../services/api-interactions.service'
 })
 export class FilmlibrarypageComponent implements OnInit {
 
-  readonly route = inject(ActivatedRoute);
-  readonly apiService = inject(ApiInteractionsService);
+  readonly route = inject(ActivatedRoute); // Injecting the ActivatedRoute service to access route parameters
+  readonly apiService = inject(ApiInteractionsService); // Injecting the ApiInteractionsService to interact with the API
 
-  search_placeholder: string = 'Cerca nella libreria ...';
-  search_link: string = '/library';
-  search_content: string = '';
+  search_placeholder: string = 'Cerca nella libreria ...'; // Placeholder for the search bar
+  search_link: string = '/library'; // Link for the search bar
+  search_content: string = ''; // Search content
 
-  library_items = signal<any[]>([]);
+  library_items = signal<any[]>([]); // Library items list
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit(): void {
-    this.loadpage();
+    this.loadPage(); // Load the page when the component is initialized
   }
 
-  loadpage() {
+  /**
+   * Load the page with the library items
+   */
+  loadPage() {
     this.route.params.subscribe(params => {
       let query = params['query'] || '';
       this.search_content = query;
 
       this.apiService.getLibrary(query).subscribe(response => {
         this.library_items.set(response);
-        console.log(this.library_items())
       });
     });
 

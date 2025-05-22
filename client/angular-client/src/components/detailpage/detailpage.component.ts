@@ -42,9 +42,8 @@ export class DetailpageComponent implements OnInit {
   item =signal<any>({});
   comments_list = signal<any>([]);
 
-
   pipedDate = new Date();
-    form!: FormGroup;
+  form!: FormGroup;
 
   constructor() {}
 

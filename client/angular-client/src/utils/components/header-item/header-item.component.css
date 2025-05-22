@@ -39,8 +39,20 @@
     align-items: center;
 }
 
+.logo-content {
+    margin-left: 2.5%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .logo {
     transition: 0.2s;
+    height: 100%;
 }
 
 .logo:hover {
